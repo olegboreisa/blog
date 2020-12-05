@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/blog/add-blog.css}" />
+          th:href="@{/blog/add-blog.css}"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Nerko+One&family=Shadows+Into+Light&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="main-container">
         <h1 id="text">WRITE YOUR TEXT BELOW</h1><br>
-
+        <form action="#" th:action="@{/getMain}" method="POST" th:object="${blogModel}">
         <label for ="blogHead">Blog Header:</label>
-        <textarea type="text" id="blogHead" name="blogHead" rows="3" cols="50"> 
+        <textarea type="text" id="blogHead" th:field="*{blogHead}" rows="3" cols="50">
         </textarea>
         <br>
         <label for ="blogText">Blog Text:</label>
-        <textarea type="text" id="blogText" name="blogText" rows="15" cols="50"> 
+        <textarea type="text" id="blogText" th:field="*{blogText}" rows="10" cols="50">
         </textarea>
 
-        <br> <br>
+        <br>
         
-        <button type="submit">POST</button><br>
-        <button type="submit">RETURN</button>
+        <button type="submit" th:name="action" th:value="post">POST</button><br>
+        <button type="submit" th:name="action" th:value="return">RETURN</button>
+        </form>
     </div>
 </body>
 </html>
