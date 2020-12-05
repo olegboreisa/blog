@@ -23,19 +23,17 @@ body {
     justify-content: center;
     /* ------ */
     width: 35%;
-    height: 500px;
+    height: 700px;
 }
 
-#welcomeText {
-    font-size: 50px;
+textarea {
+    resize: none;
+    font-family: inherit;
+    font-size: inherit;
 }
 
-#selectText {
-    font-size: 30px;
-}
-
-#reviewDiv, #addDiv {
-    text-decoration:none;
-    font-size: 20px;
-    color: black;
+button {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 24px;
+    width: 20%;
 }

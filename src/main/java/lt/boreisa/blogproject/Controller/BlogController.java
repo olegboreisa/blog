@@ -10,4 +10,9 @@ public class BlogController {
     public String openMain () {
         return "blog/main";
     }
+
+    @RequestMapping("/add-blog")
+    public String goToAddBlog () {
+        return "blog/add-blog";
+    }
 }
