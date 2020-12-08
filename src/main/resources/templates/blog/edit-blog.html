@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/blog/add-blog.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Nerko+One&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <h1 id="text">EDIT YOUR TEXT BELOW</h1><br>
+        <form action="#" th:action="@{/edited}" method="POST" th:object="${blogUpdate}">
+        <label for ="blogId">Blog ID:</label>
+        <textarea type="text" id="blogId" th:field="*{id}" rows="1" cols="2" hidden>
+        </textarea>
+        <label for ="blogHead">Blog Header:</label>
+        <textarea type="text" id="blogHead" th:field="*{blogHead}" rows="3" cols="50">
+        </textarea>
+        <br>
+        <label for ="blogText">Blog Text:</label>
+        <textarea type="text" id="blogText" th:field="*{blogText}" rows="10" cols="50">
+        </textarea>
+
+        <br>
+        
+        <button type="submit" th:name="action" th:value="update">UPDATE</button><br>
+        <button type="submit" th:name="action" th:value="return">RETURN</button>
+        </form>
+    </div>
+</body>
+</html>

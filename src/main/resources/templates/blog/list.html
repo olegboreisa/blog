@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/blog/list-blog.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Nerko+One&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+</head>
+    <body>
+        <div class="main-container">
+            <h1 id="text">YOUR BLOG POSTS</h1><br>
+                <div th:each="blog : ${allBlogs}">
+                    <div> <p th:text="${blog.blogHead}"> Header </p> </div>
+                    <br>
+                    <div> <p th:text="${blog.blogText}"> Text </p> </div>
+                    <a th:href="@{/edit/{id}(id=${blog.id})}">Edit</a>
+                    <a th:href="@{/delete/{id}(id=${blog.id})}">Delete</a>
+        </div>
+            <button type="submit">RETURN</button>
+    </body>
+</html>

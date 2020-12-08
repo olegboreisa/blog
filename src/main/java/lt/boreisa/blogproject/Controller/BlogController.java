@@ -5,15 +5,12 @@ import lt.boreisa.blogproject.Model.BlogModel;
 import lt.boreisa.blogproject.Repository.BlogRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -52,5 +49,44 @@ public class BlogController {
             return "redirect:/main";
         }
         return null;
+    }
+
+    // [GET A LIST OF BLOGS]
+    @RequestMapping(path = "/review-blog", method = RequestMethod.GET)
+    public String goToListOfBlogs (Model model) {
+        log.info ("info {}", blogRepo.findAll());
+        model.addAttribute("allBlogs", blogRepo.findAll());
+        return "blog/list";
+    }
+
+    // [EDIT BLOG]
+    @RequestMapping(path = "/edit/{id}", method = RequestMethod.GET)
+    public String editBlog (@PathVariable Long id, Model model) {
+        BlogModel blogModel = blogRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user id: " + id));
+        model.addAttribute("blogUpdate", blogModel);
+        return "blog/edit-blog";
+    }
+
+    @RequestMapping(path = "/edited", method = RequestMethod.POST)
+    public String postEditBlog (@Valid @ModelAttribute BlogModel blogModel, BindingResult bindingResult, @RequestParam("action") String action) {
+        log.info("blogModelEdit {}", blogModel);
+        if (action.equals("update")) {
+            if (bindingResult.hasErrors()) {
+                return "blog/add-blog";
+            }
+            blogRepo.save(blogModel);
+            return "redirect:/main";
+        }
+        else if (action.equals("return")) {
+            return "redirect:/main";
+        }
+        return null;
+    }
+
+    // [DELETE BLOG]
+    @RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
+    public String editBlog (@PathVariable Long id) {
+        blogRepo.deleteById(id);
+        return "blog/list";
     }
 }
