@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/blog/list-blog.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Nerko+One&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="main-container">
+    <h1 id="text">SINGLE</h1><br>
+    <div>
+        <div> <p th:text="${oneOfMany.id}"> Id </p> </div>
+        <div> <p th:text="${oneOfMany.blogText}"> Header </p> </div>
+        <br>
+        <div> <p th:text="${oneOfMany.blogHead}"> Text </p> </div>
+        <a th:href="@{/edit/{id}(id=${oneOfMany.id})}">Edit</a>
+        <a th:href="@{/delete/{id}(id=${oneOfMany.id})}">Delete</a>
+        <br>
+        <div th:if="${check}">
+            <span> <a th:href="@{/review/{id}(id=${oneOfMany.id}+1)}">Previous Post</a> </span>
+        </div>
+
+    </div>
+</body>
+</html>

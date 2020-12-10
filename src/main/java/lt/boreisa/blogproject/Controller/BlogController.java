@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -58,6 +57,26 @@ public class BlogController {
         model.addAttribute("allBlogs", blogRepo.findAll());
         return "blog/list";
     }
+
+    // [GET A LIST WITH NEXT BUTTON]
+    @RequestMapping(path = "/review/{id}", method = RequestMethod.GET)
+    public String getOneBlog (@PathVariable Long id, Model model){
+        // [FIND HOW MANY BLOGS IN TOTS]
+        Long longer = blogRepo.count();
+        int comparison = id.compareTo(longer);
+        if (comparison <= 0) {
+            BlogModel blogModel = blogRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user id: " + id));
+            log.info("check {}", blogModel);
+            model.addAttribute("oneOfMany", blogModel);
+            model.addAttribute("check", true);
+            return "blog/one-blog";
+        }
+//        log.info("longer {}", longer.getClass());
+//        log.info("id {}", id.getClass());
+        return "blog/main";
+    }
+
+
 
     // [EDIT BLOG]
     @RequestMapping(path = "/edit/{id}", method = RequestMethod.GET)
